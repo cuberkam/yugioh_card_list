@@ -1,6 +1,8 @@
+import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:yugioh_card_list/model/cards.dart';
+import 'package:yugioh_card_list/utils/constants.dart';
 import 'package:yugioh_card_list/utils/widgets.dart';
 import 'package:yugioh_card_list/views/widgets/appbar_widget.dart';
 
@@ -13,20 +15,49 @@ class CardDetailsScreen extends StatefulWidget {
   State<CardDetailsScreen> createState() => _CardDetailsScreenState();
 }
 
-class _CardDetailsScreenState extends State<CardDetailsScreen> {
+class _CardDetailsScreenState extends State<CardDetailsScreen>
+    with SingleTickerProviderStateMixin {
   late PageController _pageController;
+  late AnimationController _animationController;
+  late Animation<double> _flipAnimation;
   int _currentPage = 0;
+  bool isFlipped = false;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+
+    // AnimationController ve _flipAnimation başlatma
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+
+    _flipAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _animationController.dispose();
     super.dispose();
+  }
+
+  void _toggleFlip() {
+    setState(() {
+      isFlipped = !isFlipped;
+    });
+    if (isFlipped) {
+      _animationController.forward();
+    } else {
+      _animationController.reverse();
+    }
   }
 
   @override
@@ -40,7 +71,17 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            _buildCardImage(imageUrl),
+            GestureDetector(
+              onTap: _toggleFlip,
+              child: AnimatedBuilder(
+                animation: _flipAnimation,
+                builder: (context, child) {
+                  final angle = _flipAnimation.value * pi;
+                  final isFront = angle < pi / 2;
+                  return _buildCardImage(imageUrl, isFront, angle);
+                },
+              ),
+            ),
             const SizedBox(height: 10),
             _buildIndicator(),
             const SizedBox(height: 20),
@@ -51,7 +92,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
     );
   }
 
-  Widget _buildCardImage(String imageUrl) {
+  Widget _buildCardImage(String imageUrl, isFront, angle) {
     return AspectRatio(
       aspectRatio: 3 / 4,
       child: PageView.builder(
@@ -64,13 +105,35 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
         },
         itemBuilder: (context, index) {
           String imageUrl = widget.cardModel.cardImages![index].imageUrl!;
-          return CachedNetworkImage(
-            imageUrl: imageUrl,
-            placeholder: (context, url) => FixedCircularProgressIndicator(),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
-            fit: BoxFit.contain,
+          return Transform(
+            transform: Matrix4.rotationY(angle),
+            alignment: Alignment.center,
+            child: isFront
+                ? CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    placeholder: (context, url) =>
+                        FixedCircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    fit: BoxFit.contain,
+                  )
+                : Transform(
+                    transform: Matrix4.rotationY(pi),
+                    alignment: Alignment.center,
+                    child: _buildCardBack(),
+                  ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildCardBack() {
+    return AspectRatio(
+      aspectRatio: 3 / 4,
+      child: Image.asset(
+        cardBackImagePath,
+        fit: BoxFit.contain,
       ),
     );
   }
