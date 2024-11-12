@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
               _searchTextField(),
@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   _cardTypeDropdownList(),
                   IconButton(
-                      padding: EdgeInsets.only(left: 40),
                       onPressed: () {
                         _selectedCardType = null;
                         setState(() {});
@@ -57,7 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 cardType: _selectedCardType,
                               )));
                 },
-                child: Text('Search'),
+                child: Text(
+                  'Search',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
               ),
             ],
           ),
@@ -71,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
       value: _selectedCardType,
       hint: Text(
         "Select Card Type",
-        style: TextStyle(color: Colors.grey),
+        style: TextStyle(color: Colors.grey, fontSize: 18),
         textAlign: TextAlign.end,
       ),
       onChanged: (String? newValue) {
@@ -82,7 +84,10 @@ class _HomeScreenState extends State<HomeScreen> {
       items: cardTypes.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Text(
+            value,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         );
       }).toList(),
     );
@@ -92,9 +97,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return TextField(
       controller: _searchController,
       decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: "Search by Name",
-          prefixIcon: Icon(Icons.search)),
+        border: OutlineInputBorder(),
+        hintText: "Search by Name",
+        prefixIcon: Icon(Icons.search),
+        hintStyle: TextStyle(
+            color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 18),
+      ),
     );
   }
 }

@@ -29,3 +29,5 @@ const List<String> cardTypes = [
   'XYZ Monster',
   'XYZ Pendulum Effect Monster'
 ];
+
+const cardBackImagePath = "assets/images/card_back.jpg";
