@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yugioh_card_list/model/cards.dart';
 import 'package:yugioh_card_list/utils/constants.dart';
 import 'package:yugioh_card_list/utils/widgets.dart';
@@ -84,7 +85,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen>
             ),
             const SizedBox(height: 10),
             _buildIndicator(),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             _buildCardData(),
           ],
         ),
@@ -94,7 +95,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen>
 
   Widget _buildCardImage(String imageUrl, isFront, angle) {
     return AspectRatio(
-      aspectRatio: 3 / 4,
+      aspectRatio: 3 / 4.35,
       child: PageView.builder(
         controller: _pageController,
         itemCount: widget.cardModel.cardImages?.length ?? 0,
@@ -167,6 +168,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen>
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
+      margin: EdgeInsets.only(bottom: 20),
       elevation: 5,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -178,7 +180,14 @@ class _CardDetailsScreenState extends State<CardDetailsScreen>
             _buildInfoText("Level", widget.cardModel.level.toString()),
             _buildInfoText("Attribute", widget.cardModel.attribute),
             _buildInfoText("Description", widget.cardModel.desc),
-            _buildInfoText("More Info", widget.cardModel.moreInfo),
+            Center(
+              child: TextButton(
+                  onPressed: () => _launchUrl(url: widget.cardModel.moreInfo!),
+                  child: Text(
+                    "More Info",
+                    style: TextStyle(fontSize: 20),
+                  )),
+            )
           ],
         ),
       ),
@@ -201,5 +210,12 @@ class _CardDetailsScreenState extends State<CardDetailsScreen>
         ),
       ),
     );
+  }
+
+  Future<void> _launchUrl({required String url}) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.inAppBrowserView)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }
