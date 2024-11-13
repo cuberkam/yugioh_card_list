@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:yugioh_card_list/utils/constants.dart';
 import 'package:yugioh_card_list/views/screens/cards_screen.dart';
 import 'package:yugioh_card_list/views/widgets/appbar_widget.dart';
@@ -17,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    FlutterNativeSplash.remove();
   }
 
   @override

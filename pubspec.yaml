@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   dio: ^5.7.0
   url_launcher: ^6.3.1
+  flutter_native_splash: ^2.4.2
 
 dev_dependencies:
   flutter_test:
@@ -89,3 +90,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/splash.jpg
+  fullscreen: true
+  android: true
+  ios: true
