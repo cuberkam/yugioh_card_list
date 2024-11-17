@@ -1,16 +1,19 @@
-# yugioh_card_list
+<p align="center">
+  <img src="assets\icon\icon.png" alt="Yugioh Card List" width="200"/>
+</p>
 
-A new Flutter project.
+# Yugioh Card List
 
-## Getting Started
+Yugioh Card List is a Flutter-based mobile application designed for Yu-Gi-Oh! enthusiasts. With this app, you can effortlessly search through a vast collection of Yu-Gi-Oh! cards, access detailed information, and explore various card images. Users can also save their favorite cards for quick access later.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+Search: Easily find Yu-Gi-Oh! cards by searching by name.
+Favorites: Add desired cards to a personal favorites list.
+Card Details: View detailed information about each card, including multiple alternative images.
+Image Gallery: Swipe through a selection of images for each card in the card details section.
+Enjoy discovering and organizing your favorite Yu-Gi-Oh! cards!
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Feel free to adjust any part if you have specific points you’d like to highlight!
