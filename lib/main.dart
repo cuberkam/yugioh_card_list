@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:yugioh_card_list/services/database_service.dart';
 import 'package:yugioh_card_list/views/screens/home_screen.dart';
 
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-void main() {
+void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await DatabaseService.initialize();
   runApp(const MyApp());
 }
 

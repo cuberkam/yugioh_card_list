@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:yugioh_card_list/model/cards.dart';
+import 'package:yugioh_card_list/model/card_model.dart';
 import 'package:yugioh_card_list/services/rest_helper.dart';
 import 'package:yugioh_card_list/utils/widgets.dart';
 import 'package:yugioh_card_list/views/screens/card_details_screen.dart';
@@ -26,6 +26,8 @@ class _CardsScreenState extends State<CardsScreen> {
     return Scaffold(
       appBar: DefaultAppBar(
         title: "",
+        isVisibleFavorite: false,
+        cardModel: CardModel(),
       ),
       body: FutureBuilder<List<CardModel>>(
           future: _getCardsData(),

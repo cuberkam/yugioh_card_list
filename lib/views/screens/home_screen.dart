@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:yugioh_card_list/model/card_model.dart';
 import 'package:yugioh_card_list/utils/constants.dart';
 import 'package:yugioh_card_list/views/screens/cards_screen.dart';
+import 'package:yugioh_card_list/views/screens/favorites_screen.dart';
 import 'package:yugioh_card_list/views/widgets/appbar_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,6 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: DefaultAppBar(
         title: "",
+        isVisibleFavorite: false,
+        cardModel: CardModel(),
       ),
       body: Center(
         child: Padding(
@@ -58,9 +62,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                 cardType: _selectedCardType,
                               )));
                 },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.amber.shade600),
                 child: Text(
                   'Search',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Color(0xFF2E2831)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: const Divider(),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FavoritesScreen()));
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.amber.shade600),
+                child: Text(
+                  'My Favorites',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Color(0xFF2E2831)),
                 ),
               ),
             ],

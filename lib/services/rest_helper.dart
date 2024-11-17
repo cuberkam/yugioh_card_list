@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:yugioh_card_list/model/cards.dart';
+import 'package:yugioh_card_list/model/card_model.dart';
 
 class RestHelperService {
   Future<List<CardModel>> getCardsData(

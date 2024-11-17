@@ -37,16 +37,13 @@ class CardModel {
 }
 
 class CardImages {
-  int? id;
   String? imageUrl;
   String? imageUrlSmall;
   String? imageUrlCropped;
 
-  CardImages(
-      {this.id, this.imageUrl, this.imageUrlSmall, this.imageUrlCropped});
+  CardImages({this.imageUrl, this.imageUrlSmall, this.imageUrlCropped});
 
   CardImages.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
     imageUrl = json['image_url'];
     imageUrlSmall = json['image_url_small'];
     imageUrlCropped = json['image_url_cropped'];

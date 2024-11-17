@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:yugioh_card_list/model/cards.dart';
+import 'package:yugioh_card_list/model/card_model.dart';
 import 'package:yugioh_card_list/utils/constants.dart';
 import 'package:yugioh_card_list/utils/widgets.dart';
 import 'package:yugioh_card_list/views/widgets/appbar_widget.dart';
@@ -67,6 +67,8 @@ class _CardDetailsScreenState extends State<CardDetailsScreen>
     return Scaffold(
       appBar: DefaultAppBar(
         title: widget.cardModel.name!,
+        isVisibleFavorite: true,
+        cardModel: widget.cardModel,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20),
