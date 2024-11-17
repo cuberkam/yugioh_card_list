@@ -8,10 +8,10 @@ Yugioh Card List is a Flutter-based mobile application designed for Yu-Gi-Oh! en
 
 ## Features
 
-Search: Easily find Yu-Gi-Oh! cards by searching by name.
-Favorites: Add desired cards to a personal favorites list.
-Card Details: View detailed information about each card, including multiple alternative images.
-Image Gallery: Swipe through a selection of images for each card in the card details section.
+Search: Easily find Yu-Gi-Oh! cards by searching by name. <br>
+Favorites: Add desired cards to a personal favorites list. <br>
+Card Details: View detailed information about each card, including multiple alternative images. <br>
+Image Gallery: Swipe through a selection of images for each card in the card details section. <br>
 Enjoy discovering and organizing your favorite Yu-Gi-Oh! cards!
 
 ---
